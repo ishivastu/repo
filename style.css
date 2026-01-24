@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
 body{
@@ -11,87 +11,90 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at top, #2b0a3d, #0b0216 70%);
+    background: 
+        radial-gradient(circle at top, #3a0a5e, #12001f 70%),
+        linear-gradient(120deg, #1a002b, #0a0014);
     overflow: hidden;
     color: white;
     text-align: center;
 }
 
-/* Floating glow background */
+/* Animated star glow background */
 body::before{
     content: "";
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 20% 20%, rgba(255, 0, 120, 0.15), transparent 40%),
-      radial-gradient(circle at 80% 30%, rgba(255, 100, 200, 0.12), transparent 45%),
-      radial-gradient(circle at 50% 80%, rgba(150, 50, 255, 0.12), transparent 40%);
+      radial-gradient(circle at 20% 20%, rgba(255, 0, 150, 0.12), transparent 35%),
+      radial-gradient(circle at 80% 30%, rgba(120, 0, 255, 0.12), transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(255, 100, 200, 0.12), transparent 35%);
+    animation: bgMove 12s ease-in-out infinite alternate;
     z-index: 0;
 }
 
-/* Main container */
+/* Container */
 .container{
     position: relative;
     z-index: 1;
-    padding: 2.5rem 3.5rem;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    padding: 3rem 4rem;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     box-shadow:
-        0 0 60px rgba(255, 0, 150, 0.25),
-        inset 0 0 30px rgba(255,255,255,0.05);
-    animation: floatIn 1.8s ease;
+        0 0 80px rgba(255, 0, 150, 0.35),
+        inset 0 0 40px rgba(255,255,255,0.06);
+    animation: cinematicIn 2s ease;
 }
 
-/* Heading */
+/* Title */
 h1{
-    font-size: clamp(1.6rem, 4vw, 3.2rem);
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
     font-weight: 800;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     line-height: 1.3;
 }
 
-/* Gradient text for names */
+/* Gradient animated text */
 .name{
-    background: linear-gradient(90deg, #ff5fa2, #ff9ad5, #c77dff);
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #ff5fa2, #ffb3e1, #c77dff);
+    background-size: 300% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textGlow 4s linear infinite;
+    animation: gradientFlow 6s linear infinite;
 }
 
-/* Heart animation */
+/* Heart */
 .heart{
     display: inline-block;
-    margin: 0 12px;
-    filter: drop-shadow(0 0 10px rgba(255,0,100,0.8));
-    animation: heartbeat 1.1s infinite;
+    margin: 0 14px;
+    filter: drop-shadow(0 0 15px rgba(255,0,120,0.9));
+    animation: heartbeat 1s infinite;
 }
 
 /* Subtitle */
 .subtitle{
-    margin-top: 1.2rem;
-    font-size: clamp(0.9rem, 2vw, 1.3rem);
-    color: #ffd6f0;
-    letter-spacing: 2px;
+    margin-top: 1.3rem;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: #ffe0f3;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 /* Animations */
 @keyframes heartbeat{
     0%{ transform: scale(1); }
-    20%{ transform: scale(1.25); }
+    20%{ transform: scale(1.3); }
     40%{ transform: scale(1); }
-    60%{ transform: scale(1.25); }
+    60%{ transform: scale(1.3); }
     100%{ transform: scale(1); }
 }
 
-@keyframes floatIn{
+@keyframes cinematicIn{
     from{
         opacity: 0;
-        transform: translateY(50px) scale(0.95);
+        transform: translateY(60px) scale(0.9);
     }
     to{
         opacity: 1;
@@ -99,16 +102,21 @@ h1{
     }
 }
 
-@keyframes textGlow{
+@keyframes gradientFlow{
     0%{ background-position: 0% center; }
-    100%{ background-position: 200% center; }
+    100%{ background-position: 300% center; }
 }
 
-/* Mobile responsive */
+@keyframes bgMove{
+    0%{ transform: translate(0,0); }
+    100%{ transform: translate(-20px, -30px); }
+}
+
+/* Mobile */
 @media(max-width: 480px){
     .container{
-        padding: 1.8rem 1.5rem;
-        border-radius: 18px;
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
     }
 
     .heart{
@@ -116,6 +124,74 @@ h1{
     }
 
     .subtitle{
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
     }
+}
+/* Badge */
+.badge{
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff5fa2, #c77dff);
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(255,0,150,0.4);
+}
+
+/* Title */
+.title{
+    margin-top: 0.5rem;
+}
+
+/* Divider */
+.divider{
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff9ad5, transparent);
+    margin: 1.5rem auto;
+    box-shadow: 0 0 10px rgba(255,150,200,0.6);
+}
+
+/* Message box */
+.message-box{
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+}
+
+/* Message text */
+.message{
+    font-size: clamp(0.95rem, 2vw, 1.2rem);
+    color: #ffe3f3;
+    line-height: 1.6;
+}
+
+/* Quote */
+.quote{
+    margin-top: 1.2rem;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: #f5cfe5;
+    font-style: italic;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer-text{
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* Small heart */
+.small-heart{
+    animation: heartbeat 1.2s infinite;
 }
